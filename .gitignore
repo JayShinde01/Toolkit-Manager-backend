@@ -1,28 +1,56 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
+# ===============================
+# 🔹 Maven / Build
+# ===============================
+/target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### STS ###
+# Keep Maven wrapper
+!.mvn/wrapper/maven-wrapper.jar
+
+# ===============================
+# 🔹 Logs
+# ===============================
+*.log
+
+# ===============================
+# 🔹 OS Files
+# ===============================
+.DS_Store
+Thumbs.db
+
+# ===============================
+# 🔹 Environment Variables (IMPORTANT)
+# ===============================
+.env
+
+# ===============================
+# 🔹 Spring Boot
+# ===============================
+HELP.md
+
+# ===============================
+# 🔹 Eclipse / STS
+# ===============================
 .apt_generated
 .classpath
 .factorypath
 .project
-.settings
+.settings/
 .springBeans
 .sts4-cache
 
-# 🔹 Environment variables (IMPORTANT)
-.env
-
-### IntelliJ IDEA ###
-.idea
+# ===============================
+# 🔹 IntelliJ IDEA
+# ===============================
+.idea/
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
+# ===============================
+# 🔹 NetBeans
+# ===============================
 /nbproject/private/
 /nbbuild/
 /dist/
@@ -32,5 +60,30 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
+# ===============================
+# 🔹 VS Code
+# ===============================
 .vscode/
+
+# ===============================
+# 🔹 Java
+# ===============================
+*.class
+
+# ===============================
+# 🔹 JAR / WAR (IMPORTANT)
+# ===============================
+*.jar
+*.war
+*.ear
+
+# ===============================
+# 🔹 Docker (Optional)
+# ===============================
+docker-compose.override.yml
+
+# ===============================
+# 🔹 Misc
+# ===============================
+*.swp
+*.swo
