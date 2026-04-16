@@ -19,6 +19,8 @@ import com.example.demo.repository.StudentRepo;
 import com.example.demo.repository.userRepo;
 import com.example.demo.security.JwtUtil;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -101,34 +103,40 @@ public class AuthController {
         }
     }
     // --- 2. LOGIN ENDPOINT ---
-
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody User loginData) { 
+    public ResponseEntity<?> loginUser(@RequestBody User loginData) {
         try {
-            // 1. Search the database using the username provided in the request
             User existingUser = userrepo.findByUserName(loginData.getUserName());
-            
-            // 2. Check if the user was actually found in the database
+
             if (existingUser != null) {
-                
-                // 3. Compare the database password to the request password
+
                 if (existingUser.getPassword().equals(loginData.getPassword())) {
-                    
-                    // Passwords match! Generate the token
-                    String token = jwtUtil.generateToken(existingUser.getUserName(),existingUser.getRole().name());
-                    return ResponseEntity.ok().body(token);
-                    
+
+                    String token = jwtUtil.generateToken(
+                            existingUser.getUserName(),
+                            existingUser.getRole().name()
+                    );
+
+                    // ✅ RETURN PROPER JSON RESPONSE
+                    Map<String, Object> response = new HashMap<>();
+                    response.put("token", token);
+                    response.put("userId", existingUser.getId());
+                    response.put("userName", existingUser.getUserName());
+                    response.put("role", existingUser.getRole());
+
+                    return ResponseEntity.ok(response);
+
                 } else {
-                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Password");
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                            .body("Invalid Password");
                 }
-                
+
             } else {
-                // This 'else' now correctly pairs with the 'if (existingUser != null)' check
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("User not found");
             }
-            
+
         } catch (Exception e) {
-            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error during login: " + e.getMessage());
         }
