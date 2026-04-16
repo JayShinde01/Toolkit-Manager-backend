@@ -1,5 +1,7 @@
 package com.example.demo.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -73,6 +75,11 @@ public class StudentService {
         } catch (Exception e) {
             return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    public ResponseEntity<?> getStudentById(Integer id){
+    	Optional<Student> op = studentRepo.findById(id);
+    	if(op.isEmpty())return ResponseEntity.status(500).body("not found");
+    	return ResponseEntity.ok(op.get());
     }
 }
 

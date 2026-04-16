@@ -1,11 +1,14 @@
 package com.example.demo.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Entities.Admin;
+import com.example.demo.Entities.Student;
 import com.example.demo.repository.AdminRepo;
 import com.example.demo.repository.userRepo;
 
@@ -66,5 +69,10 @@ public class AdminService {
         } catch (Exception e) {
             return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    public ResponseEntity<?> getAdminById(Integer id){
+    	Optional<Admin> op = adminRepo.findById(id);
+    	if(op.isEmpty())return ResponseEntity.status(500).body("not found");
+    	return ResponseEntity.ok(op.get());
     }
 }
