@@ -31,6 +31,16 @@ public class ToolkitIssue {
     @Enumerated(EnumType.STRING)
     private IssueStatus status; // ISSUED, RETURNED, PENDING
 
+    private String notes; // 🔥 Damage/physical notes on return
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
 	
 
 	public Integer getId() {

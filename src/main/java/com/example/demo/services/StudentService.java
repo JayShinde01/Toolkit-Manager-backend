@@ -81,5 +81,8 @@ public class StudentService {
     	if(op.isEmpty())return ResponseEntity.status(500).body("not found");
     	return ResponseEntity.ok(op.get());
     }
+    public ResponseEntity<?> getAllStudents(){
+        return ResponseEntity.ok(studentRepo.findAll());
+    }
 }
 

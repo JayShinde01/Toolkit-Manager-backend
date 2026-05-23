@@ -38,5 +38,8 @@ public class StudentController {
 		return studentservice.getStudentById(id);
 	}
 	
-
+	@GetMapping("/")
+	public ResponseEntity<?> getAllStudents(){
+		return studentservice.getAllStudents();
+	}
 }
