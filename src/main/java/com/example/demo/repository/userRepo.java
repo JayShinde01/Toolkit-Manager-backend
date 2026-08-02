@@ -12,5 +12,6 @@ import com.example.demo.enums.UserRole;
 @Repository
 public interface userRepo extends JpaRepository<User, Integer> {
 	public User findByUserName(String name);
+	public User findByEmail(String email);
 	public List<User> findByRole(UserRole role);
 }

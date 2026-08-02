@@ -106,14 +106,14 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody User loginData) {
         try {
-            User existingUser = userrepo.findByUserName(loginData.getUserName());
+            User existingUser = userrepo.findByEmail(loginData.getEmail());
 
             if (existingUser != null) {
 
                 if (existingUser.getPassword().equals(loginData.getPassword())) {
 
                     String token = jwtUtil.generateToken(
-                            existingUser.getUserName(),
+                            existingUser.getEmail(),
                             existingUser.getRole().name()
                     );
 
