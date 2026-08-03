@@ -106,7 +106,10 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody User loginData) {
         try {
-            User existingUser = userrepo.findByEmail(loginData.getEmail());
+        	String email = loginData.getEmail();
+        	String username = loginData.getUserName();
+        	
+            User existingUser = email == null ? userrepo.findByEmail(username) : userrepo.findByEmail(email);
 
             if (existingUser != null) {
 
