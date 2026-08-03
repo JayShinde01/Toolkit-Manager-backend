@@ -19,10 +19,10 @@ public class JwtUtil {
     private final long EXPIRATION_TIME = 1000 * 60 * 60 * 10; 
 
     // --- 1. Generates the token when a user logs in ---
-    public String generateToken(String userName, String role) {
+    public String generateToken(String email, String role) {
     	System.out.println("in utils file");
         return Jwts.builder()
-                .setSubject(userName)
+                .setSubject(email)
                 .claim("role", role)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))

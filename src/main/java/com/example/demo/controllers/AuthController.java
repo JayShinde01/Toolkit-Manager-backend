@@ -110,7 +110,7 @@ public class AuthController {
 
             if (existingUser != null) {
 
-                if (existingUser.getPassword().equals(loginData.getPassword())) {
+                if (existingUser.getEmail().equalsIgnoreCase(loginData.getEmail()) && existingUser.getPassword().equalsIgnoreCase(loginData.getPassword())) {
 
                     String token = jwtUtil.generateToken(
                             existingUser.getEmail(),
